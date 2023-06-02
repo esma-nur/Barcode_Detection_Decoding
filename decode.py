@@ -150,9 +150,9 @@ def read_bars(line):
         else:
             bars.append(current_length * str(line[i]))
             current_length = 1
-    #remove quite zone
+    
     bars.pop(0)
-    #print(len(bars))
+    print(len(bars))
     return bars
     
 def classify_bars(bars):
@@ -234,19 +234,19 @@ def process_images_in_folder(folder_path):
             if is_valid:
                 print("\nDosya Adı: ", filename)
                 print("Tespit edilen kod: \n", ean13)
-                # Load the corresponding original image
+                # Karşılık gelen orijinal görüntüyü yükle
                 original_image_path = os.path.join("original_images", filename)
                 original_img = cv2.imread(original_image_path)
-                # Draw barcode on the original image
+                # Orijinal görüntünün üzerine barkod çiz
                 cv2.putText(original_img, ean13, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3, cv2.LINE_AA)
-                # Display the result image
+                # Sonucu görüntüle
                 plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
                 plt.title('Barcode'), plt.xticks([]), plt.yticks([])
                 plt.show()
                 plt.imshow(cv2.cvtColor(original_img, cv2.COLOR_BGR2RGB))
                 plt.title('Decode'), plt.xticks([]), plt.yticks([])
                 plt.show()
-                # Save the image with barcode overlay
+                # Görüntüyü barkod yerleşimi ile kaydet
                 cv2.imwrite(os.path.join(correct_decode_folder, filename), original_img)
             else:
                 print("Dosya Adı: ", filename)
